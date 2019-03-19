@@ -7,7 +7,7 @@ import numpy as np
 
 class Self_Attn(nn.Module):
     """ Self attention Layer"""
-    def __init__(self,in_dim,activation):
+    def __init__(self, in_dim, activation):
         super(Self_Attn,self).__init__()
         self.chanel_in = in_dim
         self.activation = activation
@@ -29,11 +29,11 @@ class Self_Attn(nn.Module):
         m_batchsize,C,width ,height = x.size()
         proj_query  = self.query_conv(x).view(m_batchsize,-1,width*height).permute(0,2,1) # B X CX(N)
         proj_key =  self.key_conv(x).view(m_batchsize,-1,width*height) # B X C x (*W*H)
-        energy =  torch.bmm(proj_query,proj_key) # transpose check
+        energy =  torch.bmm(proj_query, proj_key) # transpose check bmm >> batch matrix matrix multiplicatm no broadcasting
         attention = self.softmax(energy) # BX (N) X (N) 
         proj_value = self.value_conv(x).view(m_batchsize,-1,width*height) # B X C X N
 
-        out = torch.bmm(proj_value,attention.permute(0,2,1) )
+        out = torch.bmm(proj_value, attention.permute(0,2,1) )
         out = out.view(m_batchsize,C,width,height)
         
         out = self.gamma*out + x

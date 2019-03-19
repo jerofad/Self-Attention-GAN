@@ -1,4 +1,4 @@
-# Self-Attention GAN
+ # Self-Attention GAN
 **[Han Zhang, Ian Goodfellow, Dimitris Metaxas and Augustus Odena, "Self-Attention Generative Adversarial Networks." arXiv preprint arXiv:1805.08318 (2018)](https://arxiv.org/abs/1805.08318).**
 
 ## Meta overview
